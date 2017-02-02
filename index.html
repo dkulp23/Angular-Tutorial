@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html data-ng-ap="demoApp">
+<head>
+	<title>Learning Angular</title>
+</head>
+<body>
+	<!--simple model directive | in this example whatever is typed will display sychronously-->
+	<div class="container">
+		Name: <input type="text" data-ng-model="name"/> {{ name }}
+	</div>
+
+	<!--repeat in tandem with init quickly makes a list of the array-->
+	<div class="container"
+		data-ng-init="names=['Dana', 'Jill', 'Ken']">
+
+		<h3>Looping through the ng-repeat Directive</h3>
+			<ul>
+				<li data-ng-repeat="person in names">{{ person }}</li>
+			</ul>
+	</div>
+
+	<!--filter and orderBy are built in methods for manipulating data-->
+	<div>
+		<ul>
+			<!--iterate through 'customers' array => order by cust name => display names in upper case-->
+			<li data-ng-repeat="cust in customers | orderBy: 'name'">
+				{{ cust.name | uppercase}}
+			</li>
+		</ul>
+		<!--uses input text to filter array => order results by cust name => display name and city of results-->
+		<input type="test" data-ng-model="filter.name"/> <!--use the [method].[property] naming convention-->
+		<ul>
+			<li data-ng-repeat="cust in customers | filterBy: filter.name | orderBy: 'name'">
+				{{ cust.name }} - {{ cust.city }}
+			</li>
+		</ul>
+	</div>
+
+	<!--setting up and using a simple controller-->
+	<div class="container" data-ng-controller="SimpleController">
+		<h3>Adding a simple contoller with Angular</h3>
+		<ul>
+			<li data-ng-repeat="cust in customers">
+				{{ cust.name }} - {{ cust.city }}
+			</li>
+		</ul>
+	</div>
+	<!--you can add properties w/ sub-properties to the scope using the . notation-->
+	<div class="container" data-ng-controller="SimpleController">
+		Customer name:
+		<input type="text" data-ng-model="newCustomer.name" />
+		<br/>
+		Customer city:
+		<input type="text" data-ng-model="newCustomer.city" />
+		<button data-ng-click="addCustomer()">Add Customer</button>
+	</div>
+
+<script type="text/javascript" src="minErr.js"></script>
+<script type="text/javascript" src="angular.js"></script>
+<script type="text/javascript" src="controller.js"></script>
+</body>
+</html>
